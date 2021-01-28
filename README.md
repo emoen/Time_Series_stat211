@@ -1,2 +1,2 @@
 # Time_Series_stat211
-adf
+This course gives an introduction to linear time series models, such as autoregressive, moving average and ARMA models. Moreover, it is shown how the empirical autocorrelation and partial correlation can be used to identify the model. The Durbin- Levinson, the innovation algorithm and the theory for optimal forecasts are explained. The last part of the course gives an introduction to methods of estimation. Empirical modelling using the AIC and FPE criteria is mentioned as is ARCH and GARCH models.
