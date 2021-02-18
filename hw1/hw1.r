@@ -90,8 +90,6 @@ lines(p.time,yhat/1000, type="b", col = "blue")
 
 
 
-
-
 '''
 References
 Peter J Brockwell and Richard A Davis. Introduction to time series and forecasting;
