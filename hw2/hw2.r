@@ -125,5 +125,10 @@ g <- as.vector(acf(Ut, type = "covariance", lag.max = 0, plot=FALSE)$acf) #g=gam
 theta <- c((1+sqrt(1-4*p^2))/(2*p),(1-sqrt(1-4*p^2))/(2*p))
 sigmasq <- g/(1+theta^2)
 
+theta
+sigmasq
+#Need |theta| < 1 to be invertible, thus the solution is
+#theta hat = -0.494 and sigmasq hat = 0.266
+
 
 
