@@ -12,8 +12,8 @@ AR(1) with ø=0.7, plotting Auto Correlation(ACF) and Partial Auto Correlation F
 ![ACF_PACF_AR_1_b.png](https://github.com/emoen/Time_Series_stat211/blob/main/hw3/ACF_PACF_AR_1_b.png)
 
 
-|f\Mdl|      AR(P)     | MA(q)           | ARMA(p,q)|
-|-----|----------------|-----------------|----------|
-|ACF   |Tails off       | cuts off att=q | Tails off|
-|PACF  |cuts off at t=p | Tails off      | Tails off|
+|f\Mdl|      AR(P)     | MA(q)          | ARMA(p,q)|
+|-----|----------------|----------------|----------|
+|ACF   |Tails off      | cuts off at=q  | Tails off|
+|PACF  |cuts off at t=p| Tails off      | Tails off|
 
