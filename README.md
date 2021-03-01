@@ -13,6 +13,7 @@ AR(1) with ø=0.7, plotting Auto Correlation(ACF) and Partial Auto Correlation F
 
 
 |f\Mdl|      AR(P)     | MA(q)           | ARMA(p,q)|
-ACF   |Tails off       | cuts off at t=q | Tails off
-PACF  |cuts off at t=p | Tails off       | Tails off
+|-----|----------------|-----------------|----------|
+|ACF   |Tails off       | cuts off att=q | Tails off|
+|PACF  |cuts off at t=p | Tails off      | Tails off|
 
