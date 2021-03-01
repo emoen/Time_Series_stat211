@@ -7,5 +7,5 @@ This course gives an introduction to linear time series models, such as autoregr
 ## Simulating AR(1) model
 
 AR(1) with ø=0.7, plotting Auto Correlation(ACF) and Partial Auto Correlation Function(PACF). The ACF tails off while the PACF cuts off after one lag
-![ACF_PACF_AR_1png.png](https://github.com/emoen/Time_Series_stat211/blob/main/hw3/ACF_PACF_AR_1png.png)
+![ACF_PACF_AR_1_b.png](https://github.com/emoen/Time_Series_stat211/blob/main/hw3/ACF_PACF_AR_1_b.png)
 
