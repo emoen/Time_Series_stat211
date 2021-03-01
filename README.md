@@ -6,11 +6,13 @@ This course gives an introduction to linear time series models, such as autoregr
 
 ## Simulating AR(1) model
 
-f\Mdl|      AR(P)     | MA(q)           | ARMA(p,q)
----------------------------------------------------
-ACF  |Tails off       | cuts off at t=q | Tails off
-PACF |cuts off at t=p | Tails off       | Tails off
+
 
 AR(1) with ø=0.7, plotting Auto Correlation(ACF) and Partial Auto Correlation Function(PACF). The ACF tails off while the PACF cuts off after one lag
 ![ACF_PACF_AR_1_b.png](https://github.com/emoen/Time_Series_stat211/blob/main/hw3/ACF_PACF_AR_1_b.png)
+
+
+|f\Mdl|      AR(P)     | MA(q)           | ARMA(p,q)|
+ACF   |Tails off       | cuts off at t=q | Tails off
+PACF  |cuts off at t=p | Tails off       | Tails off
 
