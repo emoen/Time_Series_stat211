@@ -17,7 +17,7 @@ AR(1) with ø=0.7, plotting Auto Correlation(ACF) and Partial Auto Correlation F
 |ACF   |Tails off      | cuts off at=q  | Tails off|
 |PACF  |cuts off at t=p| Tails off      | Tails off|
 
-## Simulating AR(2) model
+## AR(2) stationarity 
 Draw the rectangle defined by {φ2 = 1, φ2 − φ1 = 1} in a φ1φ2-coordinate system:
 
 ![AR_2_stationarity.png](https://github.com/emoen/Time_Series_stat211/blob/main/hw4/AR_2_stationarity.png)
