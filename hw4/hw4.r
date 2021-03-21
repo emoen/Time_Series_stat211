@@ -60,3 +60,16 @@ theta[1]+theta[2]*psi[2]+theta[3]*psi[3],
 theta[2]+theta[3]*psi[2],theta[3],rep(0,nrow(M)-4))
 gamma.h = solve(M,s)
 plot(0:m,gamma.h, col = 4, type = "h", xlab= "h", ylab = "Autocovariance")
+
+#4.5
+# Use R and draw the rectangle defined by (4.11) in a φ1φ2-coordinate system
+phi1 = seq(from = -2.5, to = 2.5, length = 51) 
+plot(phi1,1+phi1,lty="dashed",type="l",xlab="",ylab="",cex.axis=.8,ylim=c(-1.5,1.5))
+abline(a = -1, b = 0, lty="dashed")
+abline(a = 1, b = -1, lty="dashed")
+title(ylab=expression(phi[2]),xlab=expression(phi[1]),cex.lab=.8)
+polygon(x = phi1[6:46], y = 1-abs(phi1[6:46]), col="gray")
+lines(phi1,-phi1^2/4)
+text(0,-.5,expression(phi[2]<phi[1]^2/4),cex=.7)
+text(1.2,.5,expression(phi[2]>1-phi[1]),cex=.7)
+text(-1.75,.5,expression(phi[2]>1+phi[1]),cex=.7)
