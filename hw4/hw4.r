@@ -73,3 +73,9 @@ lines(phi1,-phi1^2/4)
 text(0,-.5,expression(phi[2]<phi[1]^2/4),cex=.7)
 text(1.2,.5,expression(phi[2]>1-phi[1]),cex=.7)
 text(-1.75,.5,expression(phi[2]>1+phi[1]),cex=.7)
+
+# 4.9 a)
+theta = c(1.8, 0.9)
+Mod(polyroot(c(1,theta)))
+#[1] 1.054093 1.054093
+# Hence invertible as roots larger than 1
