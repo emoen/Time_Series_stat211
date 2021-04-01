@@ -23,6 +23,11 @@ sample.sd = sd(x_min)
 sample.se = sample.sd/sqrt(sample.n)
 bound = ci_for_u(sample)
 
+#MLE
+print(max(x_min))
+#[1] 0.7081458
+
+#MoM
 #2*sample_mean [1] 0.5812125
 #t-score [1] 2.776445
 #confidence interval [1] 0.2281778 0.9342472
@@ -33,12 +38,19 @@ sample.n = max_n
 sample.sd = sd(x_max)
 sample.se = sample.sd/sqrt(sample.n)
 bound = ci_for_u(sample)
+
+#MLE
+print(max(x_max))
+#[1] 0.999497
+
+#MoM
 #2*sample_mean [1] 0.9991154
 #t-score [1] 1.962341
 #confidence interval [1] 0.9814277 1.0168030
 
-# discuss: likelihood ratio test is better.
+# discuss: likelihood ratio test is asymptotically better 
 # theta_Mom contains level alpha=0.05 test with theta > 1 when we know U(0,1)
+# But for small sample size MoM is better (n approximatly 5)
 
 ci_for_u <- function(sample) {
 	alpha = 0.05
