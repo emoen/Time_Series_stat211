@@ -129,10 +129,112 @@ head(Xt)
 acf(Xt, type="covariance")
 
 #c) Find {theta_inf,j | j = 1..q, v_inf} from the IA with input 
-# {gamm(h) | h = 0..q} If the algortihm does not converge, 
+# {gamma(h) | h = 0..q} If the algortihm does not converge, 
 # increase q to q' and use gamma(h) ;h = 0..q' as input
 gamma.emp = as.vector(acf(Xt, type="covariance", plot=FALSE)$acf)
 length(gamma.emp)
 ia2 = IA(N, gamma.emp)
 theta.inf2 = ia2$theta[N, 1:5];theta.inf2
 nu.inf2 = ia2$nu[N];nu.inf2
+
+# d) Compute and plot the autocovariance function defined the 
+# parameters from the IA given in c). Compare with b)
+gamma.acvf <- sapply(h, FUN=gammaX, theta=theta.inf2, sigma=sqrt(nu.inf2))
+acf(Xt, type="covariance", lag.max = 15)
+lines(h+0.08, gamma.acvf, type="h", col="green")
+gamma.acvf
+# [1]  1.00313296 -0.14888739  0.09920841  0.06194804 -0.24862657  0.23970684  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+gamma.emp[1:(q+1)]
+#[1]  1.00313296 -0.14888739  0.09920841  0.06194804 -0.24862657  0.22084301
+
+# gamma.ia2 which is ACVF and  gamma.emp which is empirical ACVF 
+# is the same expect last term. ACVF sligtly larger than empirical ACVF
+
+# e) 
+'''
+The estimators theta_hat, sigma_hat from IA - satisfy the equation because, we see from the plot
+that the emprical ACVF is approximately equal to the theoretical ACVF (mentioned in 5.1 a) 
+
+What do you call these estimators?
+Moment estimators.
+
+How can you do this without using IA?
+Could have used Newton-Rhapson/newton method - root finding algorithm
+'''
+
+# 5.4 An AR(6) model
+# Do basic descriptive statistics and estimation for the there cases. 
+# Present plots and for the estimation use both Yule Walker, least square and maximum likelihood
+# acf, spectrum, spec.pgram, spectrum, arima, ar
+# 1. Discuss which parameters that are significant for the different situations. 
+# 2. How mabny observations are need for this size of the model? 
+# 3. Comment a parametric versus a nonparametric estimate of the spectral density. 
+# 4. Can you see any connection between the data and the empirical ACF or the spectral density?
+# 5. You have used 3 different estimation methods for the autoregressive parameter vector. Do they differ much?
+
+phi = c(0.40, 0.36, -0.47, 0.45, 0.21, -0.03)
+set.seed(1234)
+
+Mod(polyroot(c(1,phi)))
+
+N1=100
+Xt.1 = arima.sim(list(ar=phi), n=N1, innov = rnorm(N1) )
+N2=1000
+Xt.2 = arima.sim(list(ar=phi), n=N2, innov = rnorm(N2) )
+N3=100000
+Xt.3 = arima.sim(list(ar=phi), n=N3, innov = rnorm(N3) )
+
+#descriptive statistics
+summary(Xt.1);var(Xt.1)
+summary(Xt.2);var(Xt.2)
+summary(Xt.3);var(Xt.3)
+par(mfrow=c(3,1))
+plot(1:N1, Xt.1, type="l")
+plot(1:N2, Xt.2, type="l")
+plot(1:N3, Xt.3, type="l")
+par(mfrow=c(3,1))
+acf(Xt.1, type="covariance")
+acf(Xt.2, type="covariance")
+acf(Xt.3, type="covariance")
+
+
+ar_order=6
+
+
+ar.ols(x = Xt.1, aic = FALSE, order.max = 6)
+ar(Xt.1, order=ar_order, method="yw")
+ar(Xt.1, order=ar_order, method="mle")
+ar(Xt.1, order=ar_order, method="burg")
+'''
+ols: 0.4659   0.2360  -0.4993   0.4478   0.1301   0.0372      
+yw:	 0.4595   0.1501  -0.4686   0.4738  
+mle: 0.5231   0.1386  -0.4991   0.5357  
+burg:0.5001   0.1534  -0.5121   0.5110
+'''
+
+ar.ols(x = Xt.2, aic = FALSE, order.max = ar_order)
+ar(Xt.2, order=ar_order, method="yw")
+ar(Xt.2, order=ar_order, method="mle")
+ar(Xt.2, order=ar_order, method="burg")
+'''
+ols: 0.3880   0.4106  -0.4998   0.4686   0.2161  -0.1100      
+yw:	 0.3855   0.4031  -0.4921   0.4684   0.2103  -0.1042 
+mle: 0.3855   0.4031  -0.4921   0.4684   0.2103  -0.1042 
+burg:0.3868   0.4068  -0.4984   0.4713   0.2156  -0.1102 
+'''
+
+ar.ols(x = Xt.3, aic = FALSE, order.max = ar_order)
+ar(Xt.3, order=ar_order, method="yw")
+ar(Xt.3, order=ar_order, method="mle")
+ar(Xt.3, order=ar_order, method="burg")
+'''
+ols: 0.3989   0.3646  -0.4747   0.4507   0.2132  -0.0366      
+yw:	 0.3989   0.3646  -0.4746   0.4507   0.2131  -0.0366 
+mle: 0.3988   0.3646  -0.4747   0.4506   0.2132  -0.0366 
+burg:0.3988   0.3646  -0.4747   0.4506   0.2132  -0.0366 
+
+phi = c(0.40, 0.36, -0.47, 0.45, 0.21, -0.03)
+#Pretty close to ground truth when N is large
+'''
+
+
