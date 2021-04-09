@@ -117,8 +117,7 @@ sigma2z = 1/(1+sum(theta^2));sigma2z
 
 N = 1000
 sigmaz = sqrt(sigma2z)
-#Library for rlaplace: extraDistr
-#mu, sigma location and scale parameters. Scale must be positive.
+#rlaplace -> lib(extraDistr)
 library(extraDistr)
 set.seed(1234)
 Zt = rlaplace(n=N, mu=0, sigma=sigmaz/sqrt(2))
@@ -131,9 +130,9 @@ acf(Xt, type="covariance")
 #c) Find {theta_inf,j | j = 1..q, v_inf} from the IA with input 
 # {gamma(h) | h = 0..q} If the algortihm does not converge, 
 # increase q to q' and use gamma(h) ;h = 0..q' as input
-gamma.emp = as.vector(acf(Xt, type="covariance", plot=FALSE)$acf)
-length(gamma.emp)
-ia2 = IA(N, gamma.emp)
+emp.gamma = as.vector(acf(Xt, type="covariance", plot=FALSE)$acf)
+length(emp.gamma)
+ia2 = IA(N, emp.gamma)
 theta.inf2 = ia2$theta[N, 1:5];theta.inf2
 nu.inf2 = ia2$nu[N];nu.inf2
 
@@ -144,10 +143,10 @@ acf(Xt, type="covariance", lag.max = 15)
 lines(h+0.08, gamma.acvf, type="h", col="green")
 gamma.acvf
 # [1]  1.00313296 -0.14888739  0.09920841  0.06194804 -0.24862657  0.23970684  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
-gamma.emp[1:(q+1)]
+emp.gamma[1:(q+1)]
 #[1]  1.00313296 -0.14888739  0.09920841  0.06194804 -0.24862657  0.22084301
 
-# gamma.ia2 which is ACVF and  gamma.emp which is empirical ACVF 
+# gamma.ia2 which is ACVF and  emp.gamma which is empirical ACVF 
 # is the same expect last term. ACVF sligtly larger than empirical ACVF
 
 # e) 
@@ -165,13 +164,6 @@ Could have used Newton-Rhapson/newton method - root finding algorithm
 # 5.4 An AR(6) model
 # Do basic descriptive statistics and estimation for the there cases. 
 # Present plots and for the estimation use both Yule Walker, least square and maximum likelihood
-# acf, spectrum, spec.pgram, spectrum, arima, ar
-# 1. Discuss which parameters that are significant for the different situations. 
-# 2. How mabny observations are need for this size of the model? 
-# 3. Comment a parametric versus a nonparametric estimate of the spectral density. 
-# 4. Can you see any connection between the data and the empirical ACF or the spectral density?
-# 5. You have used 3 different estimation methods for the autoregressive parameter vector. Do they differ much?
-
 phi = c(0.40, 0.36, -0.47, 0.45, 0.21, -0.03)
 set.seed(1234)
 
@@ -236,5 +228,36 @@ burg:0.3988   0.3646  -0.4747   0.4506   0.2132  -0.0366
 phi = c(0.40, 0.36, -0.47, 0.45, 0.21, -0.03)
 #Pretty close to ground truth when N is large
 '''
+
+spectrum(Xt.1, ..., )
+par(mfrow = c(2,2))
+spectrum(Xt.1 )  #method = c("pgram", "ar")
+spectrum(Xt.1, spans = 3)
+spectrum(Xt.1, spans = c(3,3))
+spectrum(Xt.1, spans = c(3,5))
+
+spectrum(ldeaths)
+spectrum(ldeaths, spans = c(3,3))
+spectrum(ldeaths, spans = c(3,5))
+spectrum(ldeaths, spans = c(5,7))
+spectrum(ldeaths, spans = c(5,7), log = "dB", ci = 0.8)
+
+# acf, spectrum, spec.pgram, spectrum, arima, ar
+# 1. Discuss which parameters that are significant for the different situations. 
+# 2. How mabny observations are need for this size of the model? 
+# 3. Comment a parametric versus a nonparametric estimate of the spectral density. 
+# 4. Can you see any connection between the data and the empirical ACF or the spectral density?
+# 5. You have used 3 different estimation methods for the autoregressive parameter vector. Do they differ much?
+
+#Answere:
+# 5: OLS, YW, MLE are equal for large N1
+# 4: 
+coeftest(arima(Xt.N1, order=c(p,0,0), method="ML"))
+# 3:
+# non-parametric: periodogram, parametric: AR estimation
+# er to metoder i spectrum, en parametrisk og en ikke.
+spectrum(Xt.N1, method="ar")
+spectrum(Xt.N1, method="pgram")
+#https://en.wikipedia.org/wiki/Spectral_density_estimation?fbclid=IwAR1azWt2zz6iM5O8gO5AaJpvHehBv28tM-dgPGbTGILagk5E5xX0zHy3kko #Techniques
 
 
