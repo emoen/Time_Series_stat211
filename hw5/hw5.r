@@ -442,7 +442,7 @@ getPhiFromCausalRoots = function( z_i ) {
 	return (phi)
 }
 
-causal_phi = Re( phi.given.roots( causal ) )
+causal_phi = Re( getPhiFromCausalRoots( causal ) )
 
 # 5.8
 # Simulate with N = 1000 the model
