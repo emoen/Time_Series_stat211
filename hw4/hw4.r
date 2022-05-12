@@ -74,6 +74,43 @@ text(0,-.5,expression(phi[2]<phi[1]^2/4),cex=.7)
 text(1.2,.5,expression(phi[2]>1-phi[1]),cex=.7)
 text(-1.75,.5,expression(phi[2]>1+phi[1]),cex=.7)
 
+
+
+# Numerically approximate causal AR(2) region
+abline(a=1, b=0 , col=c("red"))
+abline(a=-1, b=0 , col=c("red"))
+abline(v=c(-2,2) , col=c("red"))
+
+#Unifonr random sample in 2D
+size <- 20             #length of random number vectors
+set.seed(1) 
+x <- runif(size)          # generate samples from uniform distribution (0.0, 1.0)
+y <-runif(size) 
+a = specify(ar=c(x[1], y[1]))
+check(a)
+x <- system("check(a)", intern = TRUE) #wtf
+df <-data.frame(x,y)
+points(df)
+
+
+# Stupid f**king R method that doesnt return result but writes to output
+checkLocal = function(a) {
+  phi = c(1,-a$phi)
+  theta = c(1,a$theta)
+  if (all(abs(polyroot(phi)) > 1)){
+    cat("Causal\n")
+    return(1)
+  }
+  #else
+  cat("Non-Causal\n")
+  return(0)
+    
+  #if (all(abs(polyroot(theta)) > 1))
+  #  cat("Invertible\n")
+  #else
+  #  cat("Non-Invertible\n")
+}
+
 # 4.9 a)
 theta = c(1.8, 0.9)
 Mod(polyroot(c(1,theta)))
