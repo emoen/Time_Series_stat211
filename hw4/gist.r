@@ -1,3 +1,5 @@
+#or AR(3) the area of causal roots it is less than 30%, for AR(4) it is less than 17%, for AR(5) it is less than 9% and for #AR(6) it is less than 5%
+
 size <- 200000           #Uniform random sample in 6D  
 x <- runif(size, min = -2, max = 2) 
 y <-runif(size, min = -1, max = 1)
