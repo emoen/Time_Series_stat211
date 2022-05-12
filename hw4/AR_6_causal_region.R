@@ -34,8 +34,11 @@ for( i in c(1:size) ) {
   if (all(abs(polyroot(phi)) > 1)){
     points(x[i], y[i],  col = "red")
     count = count +1
+  } else{
+    points(x[i], y[i],  col = "gray")
   }
 }
+print(count/size)
 
 
 
@@ -155,7 +158,7 @@ print( paste(xs[bestz], ys[bestz], zs[bestz], vs[bestz], vs[bestz], us[bestz], s
 print(max(unlist(vs)))
 bestv = which.max(unlist(vs))
 print( paste(xs[bestv], ys[bestv], zs[bestv], vs[bestv], vs[bestv],  us[bestv], sep=" "))
-print(max(unlist(ts)))
+print(max(unlist(us)))
 bestu = which.max(unlist(us))
 print( paste(xs[bestv], ys[bestv], zs[bestv], vs[bestv], vs[bestu], us[bestu], sep=" "))
 print(count)
@@ -169,15 +172,17 @@ y <-runif(size, min = -1, max = 1)
 z <-runif(size, min = -1, max = 1)
 v <-runif(size, min = -1, max = 1)
 u <-runif(size, min = -1, max = 1)
+t <-runif(size, min = -1, max = 1)
 
 xs = c()
 ys = c()
 zs = c()
 vs = c()
 us = c()
+ts = c()
 count=0
 for( i in c(1:size) ) {
-  a = specify(ar=c(x[i], y[i], z[i], v[i], u[i]))  
+  a = specify(ar=c(x[i], y[i], z[i], v[i], u[i], t[i]))  
   phi = c(1,-a$phi)
   if (all(abs(polyroot(phi)) > 1)){
     #points(x[i], y[i],  col = "red")
@@ -186,6 +191,7 @@ for( i in c(1:size) ) {
     zs = c(zs, z[i])
     vs = c(vs, v[i])
     us = c(us, u[i])
+    ts = c(ts, u[i])
     count = count +1
   }
 }
@@ -201,9 +207,13 @@ print( paste(xs[bestz], ys[bestz], zs[bestz], vs[bestz], vs[bestz], us[bestz], s
 print(max(unlist(vs)))
 bestv = which.max(unlist(vs))
 print( paste(xs[bestv], ys[bestv], zs[bestv], vs[bestv], vs[bestv],  us[bestv], sep=" "))
-print(max(unlist(ts)))
+print(max(unlist(us)))
 bestu = which.max(unlist(us))
 print( paste(xs[bestv], ys[bestv], zs[bestv], vs[bestv], vs[bestu], us[bestu], sep=" "))
+
+print(max(unlist(ts)))
+bestt = which.max(unlist(ts))
+print( paste(xs[bestt], ys[bestt], zs[bestt], vs[bestt], vs[bestt], us[bestu], ts[bestt], sep=" "))
 print(count)
 print(count/size)
 
